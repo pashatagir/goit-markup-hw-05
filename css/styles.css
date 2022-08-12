@@ -8,7 +8,8 @@
   --color-deco: #afb1b8;
   --transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
   --transition-color: color 250ms var(--transition-timing),
-    background-color 250ms var(--transition-timing), fill 250ms var(--transition-timing);
+    background-color 250ms var(--transition-timing), fill 250ms var(--transition-timing),
+    box-shadow 250ms var(--transition-timing), transform 250ms var(--transition-timing);
 }
 
 body {
@@ -81,6 +82,8 @@ ul {
   cursor: pointer;
   font-size: 16px;
   padding: 0;
+
+  transition: var(--transition-color);
 }
 
 .section {
@@ -147,8 +150,7 @@ ul {
   color: var(--accent-color);
 }
 
-.current::after,
-.otherpages-link:not(.current):hover::after {
+.current::after {
   content: '';
   display: block;
   width: 100%;
@@ -159,6 +161,26 @@ ul {
   position: absolute;
   left: 0;
   bottom: -1px;
+}
+
+.otherpages-link:not(.current)::after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  background-color: var(--accent-color);
+
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+
+  transform: scaleX(0);
+  transition: var(--transition-color);
+}
+
+.otherpages-link:hover::after {
+  transform: scaleX(1);
 }
 
 .contacts-link {
@@ -205,7 +227,6 @@ ul {
   letter-spacing: 0.06em;
   color: var(--normal-color);
   background-color: var(--accent-color);
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
   border-radius: 4px;
   padding: 10px 32px 10px 32px;
   min-width: 216px;
@@ -213,10 +234,8 @@ ul {
 
 .hero-button:hover,
 .hero-button:focus {
-  color: var(--normal-color);
   background-color: #188ce8;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
-  border-radius: 4px;
 }
 
 /* -----------section benefits-------------- */
@@ -267,13 +286,34 @@ ul {
   column-gap: 30px;
 }
 
-.what-we-to-do-item {
+.what-we-do-item {
   flex-basis: calc((100% - 60px) / 3);
+  position: relative;
 }
 img {
   display: block;
   max-width: 100%;
   height: auto;
+}
+
+.what-we-do-wrap {
+  width: 100%;
+  background-color: rgba(47, 48, 58, 0.8);
+
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.what-we-do-subtitle {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.14;
+  text-align: center;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--normal-color);
+  padding: 27px 0px;
 }
 
 /* ----------------section our-team ----------*/
@@ -462,7 +502,6 @@ img {
   background-color: var(--accent-color);
   box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.08),
     0px 2px 2px rgba(0, 0, 0, 0.12);
-  border-radius: 4px;
 }
 
 .examples-list {
